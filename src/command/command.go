@@ -2,7 +2,7 @@ package command
 
 import (
 	"errors"
-	"monorepo_manager/src/constant"
+	"monorepo_manager/src/global"
 )
 
 type Command string
@@ -19,5 +19,5 @@ func Run(cmd Command, params []string) error {
 	case Init:
 		return initialize()
 	}
-	return errors.New(constant.CommandNotFound)
+	return errors.New(global.CommandNotFound)
 }
