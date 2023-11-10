@@ -2,7 +2,7 @@ package test
 
 import "testing"
 
-func AssertStringEq(t *testing.T, expect string, got string) {
+func AssertStringEq(t *testing.T, got string, expect string) {
 	if expect != got {
 		t.Errorf("Expect: [%s], Got: [%s]\n", expect, got)
 	}
@@ -21,5 +21,17 @@ func AssertErrorEq(t *testing.T, err error, expect string) {
 	errStr := err.Error()
 	if errStr != expect {
 		t.Errorf("Expected error [%s] but got [%s]", expect, errStr)
+	}
+}
+
+func AssertError(t *testing.T, err error) {
+	if err == nil {
+		t.Errorf("Expected error but got none")
+	}
+}
+
+func AssertNumEq(t *testing.T, got int, expect int) {
+	if expect != got {
+		t.Errorf("Expect: [%d], Got: [%d]\n", expect, got)
 	}
 }

@@ -19,6 +19,9 @@ func Run(cmd Command, params []string) error {
 	switch cmd {
 	case Init:
 		return initialize()
+
+	case Help:
+		return help()
 	}
 	return errors.New(global.CommandNotFound)
 }

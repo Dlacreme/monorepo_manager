@@ -3,24 +3,24 @@ package command
 import (
 	"errors"
 	"fmt"
+	"monorepo_manager/src/config"
 	"monorepo_manager/src/global"
-	"monorepo_manager/src/template"
 	"os"
 )
 
 // Create a default config file
 // (init keyword was already taken)
 func initialize() error {
-	if isFileExisting(global.ConfigFilePath) {
-		return errors.New(fmt.Sprint(global.ConfigFilePath, " ", global.FileExisting))
+	if isFileExisting(config.FilePath) {
+		return errors.New(fmt.Sprint(config.FilePath, " ", global.FileExisting))
 	}
 
-	err := os.WriteFile(global.ConfigFilePath, template.EmptyConfigFile(), 0644)
+	err := os.WriteFile(config.FilePath, config.EmptyConfigFile(), 0644)
 	if err != nil {
 		return err
 	}
 
-	fmt.Println(global.ConfigFilePath, global.FileCreated)
+	fmt.Println(config.FilePath, global.FileCreated)
 	return nil
 }
 

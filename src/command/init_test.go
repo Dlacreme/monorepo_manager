@@ -2,6 +2,7 @@ package command
 
 import (
 	"fmt"
+	"monorepo_manager/src/config"
 	"monorepo_manager/src/global"
 	"monorepo_manager/src/test"
 	"os"
@@ -10,16 +11,16 @@ import (
 
 func TestInitialize(t *testing.T) {
 	t.Run("create the config file as expected", func(t *testing.T) {
-		os.Remove(global.ConfigFilePath)
+		os.Remove(config.FilePath)
 		err := initialize()
 		test.AssertNoError(t, err)
-		os.Remove(global.ConfigFilePath)
+		os.Remove(config.FilePath)
 	})
 
 	t.Run("return an error if the file is already existing", func(t *testing.T) {
-		os.WriteFile(global.ConfigFilePath, []byte{'0'}, 0644)
+		os.WriteFile(config.FilePath, []byte{'0'}, 0644)
 		err := initialize()
-		test.AssertErrorEq(t, err, fmt.Sprint(global.ConfigFilePath, " ", global.FileExisting))
-		os.Remove(global.ConfigFilePath)
+		test.AssertErrorEq(t, err, fmt.Sprint(config.FilePath, " ", global.FileExisting))
+		os.Remove(config.FilePath)
 	})
 }
