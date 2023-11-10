@@ -12,10 +12,15 @@ import (
 // (init keyword was already taken)
 func initialize() error {
 	if isFileExisting(global.ConfigFilePath) {
-		return errors.New(fmt.Sprintf(global.FileExisting, global.ConfigFilePath))
+		return errors.New(fmt.Sprint(global.ConfigFilePath, " ", global.FileExisting))
 	}
-	os.WriteFile(global.ConfigFilePath, template.EmptyConfigFile(), 0644)
 
+	err := os.WriteFile(global.ConfigFilePath, template.EmptyConfigFile(), 0644)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(global.ConfigFilePath, global.FileCreated)
 	return nil
 }
 

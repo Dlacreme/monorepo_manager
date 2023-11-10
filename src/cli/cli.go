@@ -38,8 +38,10 @@ func LineFromArgs(args []string) (*Line, error) {
 
 func detectCommand(arg string) (command.Command, error) {
 	switch strings.ToLower(arg) {
-	case "init":
+	case "init", "-i":
 		return command.Init, nil
+	case "help", "-h":
+		return command.Help, nil
 	}
 	return "", errors.New(global.InvalidCommandLine)
 }

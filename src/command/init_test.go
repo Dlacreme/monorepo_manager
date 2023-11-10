@@ -19,7 +19,7 @@ func TestInitialize(t *testing.T) {
 	t.Run("return an error if the file is already existing", func(t *testing.T) {
 		os.WriteFile(global.ConfigFilePath, []byte{'0'}, 0644)
 		err := initialize()
-		test.AssertErrorEq(t, err, fmt.Sprintf(global.FileExisting, global.ConfigFilePath))
+		test.AssertErrorEq(t, err, fmt.Sprint(global.ConfigFilePath, " ", global.FileExisting))
 		os.Remove(global.ConfigFilePath)
 	})
 }

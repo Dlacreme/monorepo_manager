@@ -9,6 +9,7 @@ type Command string
 
 // list available commands
 const (
+	Help Command = "help"
 	Init Command = "init"
 )
 
