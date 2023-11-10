@@ -3,18 +3,27 @@ package cli
 import (
 	"errors"
 	"monorepo_manager/src/command"
-	"monorepo_manager/src/content"
+	"monorepo_manager/src/constant"
 	"strings"
 )
 
+// represents a command line parsed & validated
+type Line struct {
+	Command command.Command
+	Params  []string
+}
+
+// parse args into a valid Line or return an error if the input is invalid
 func LineFromArgs(args []string) (*Line, error) {
 	if len(args) < 1 {
-		return nil, errors.New(content.ExpectArgument)
+		return nil, errors.New(constant.ExpectArgument)
 	}
+
 	command, err := detectCommand(args[0])
 	if err != nil {
 		return nil, err
 	}
+
 	commandArgs, err := parseCommandParams(command, args[1:])
 	if err != nil {
 		return nil, err
@@ -27,18 +36,12 @@ func LineFromArgs(args []string) (*Line, error) {
 	return &l, nil
 }
 
-type Line struct {
-	Command command.Command
-	Params  []string
-}
-
 func detectCommand(arg string) (command.Command, error) {
-	arg = strings.ToLower(arg)
 	switch strings.ToLower(arg) {
 	case "init":
 		return command.Init, nil
 	}
-	return "", errors.New(content.CommandNotFound)
+	return "", errors.New(constant.InvalidCommandLine)
 }
 
 func parseCommandParams(command command.Command, args []string) ([]string, error) {

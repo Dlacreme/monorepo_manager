@@ -10,8 +10,12 @@ import (
 func main() {
 	line, err := cli.LineFromArgs(os.Args[1:])
 	if err != nil {
-		fmt.Printf("(exit) Error:\n%s\n", err)
+		fmt.Printf("Error:\n%s\n", err)
 		return
 	}
-	command.Run(line.Command, line.Params)
+
+	err = command.Run(line.Command, line.Params)
+	if err != nil {
+		fmt.Printf("Failed to execute '%s':\n%s\n", line.Command, err)
+	}
 }
