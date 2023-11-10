@@ -4,26 +4,34 @@ import "fmt"
 
 func help() error {
 	fmt.Printf(`
-Usage:
+NAME:
+	mm - monorepo manager
 
-  - list, l
-  	list all workspaces available
+DESCRIPTION:
+	The current workspace is defined using the ENV variable MM_WORKSPACE.
 
-  - use, u $workspace
-  	define the workspace to use
+COMMANDS:
 
-  - repository
-	get the workspace currently used
+	Usage:
 
-Config:
+	- list, l
+		list all workspaces available
 
-  - init, i
-  	create a default monorepo.toml file
+	- use, u $workspace
+		define the workspace to use
 
-Other:
+	- workspace, w
+		get the workspace currently used
 
-  - help, h
-	display this helper
+	Config:
+
+	- init, i
+		create a default monorepo.toml file
+
+	Other:
+
+	- help, h
+		display this helper
 
 `)
 	return nil

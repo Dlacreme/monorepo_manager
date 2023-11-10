@@ -2,6 +2,7 @@ package cli
 
 import (
 	"errors"
+	"fmt"
 	"monorepo_manager/src/command"
 	"monorepo_manager/src/global"
 	"strings"
@@ -16,7 +17,7 @@ type Line struct {
 // parse args into a valid Line or return an error if the input is invalid
 func LineFromArgs(args []string) (*Line, error) {
 	if len(args) < 1 {
-		return nil, errors.New(global.ExpectArgument)
+		return nil, errors.New(fmt.Sprint("mm ", global.ExpectArgument))
 	}
 
 	command, err := detectCommand(args[0])
@@ -38,14 +39,28 @@ func LineFromArgs(args []string) (*Line, error) {
 
 func detectCommand(arg string) (command.Command, error) {
 	switch strings.ToLower(arg) {
-	case "init", "-i":
+	case "init", "i":
 		return command.Init, nil
-	case "help", "-h":
+	case "help", "h":
 		return command.Help, nil
+	case "list", "l":
+		return command.List, nil
+	case "use", "u":
+		return command.Use, nil
+	case "workspace", "w":
+		return command.Workspace, nil
 	}
 	return "", errors.New(global.InvalidCommandLine)
 }
 
-func parseCommandParams(command command.Command, args []string) ([]string, error) {
-	return args, nil
+func parseCommandParams(cmd command.Command, args []string) ([]string, error) {
+	params := []string{}
+	switch cmd {
+	case command.Use:
+		if len(args) < 1 {
+			return nil, errors.New(fmt.Sprint(command.Use, " ", global.ExpectArgument))
+		}
+		params = append(params, args[0])
+	}
+	return params, nil
 }

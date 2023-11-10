@@ -9,8 +9,11 @@ type Command string
 
 // list available commands
 const (
-	Help Command = "help"
-	Init Command = "init"
+	Help      Command = "help"
+	Init      Command = "init"
+	List      Command = "list"
+	Use       Command = "use"
+	Workspace Command = "workspace"
 )
 
 const ()
