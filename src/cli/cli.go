@@ -25,7 +25,7 @@ func LineFromArgs(args []string) (*Line, error) {
 		return nil, err
 	}
 
-	commandArgs, err := parseCommandParams(command, args[1:])
+	commandArgs, err := parseCommandParams(command, args)
 	if err != nil {
 		return nil, err
 	}
@@ -50,17 +50,22 @@ func detectCommand(arg string) (command.Command, error) {
 	case "workspace", "w":
 		return command.Workspace, nil
 	}
-	return "", errors.New(content.InvalidCommandLine)
+
+	// custom command
+	return command.Exec, nil
 }
 
 func parseCommandParams(cmd command.Command, args []string) ([]string, error) {
 	params := []string{}
 	switch cmd {
 	case command.Use:
-		if len(args) < 1 {
+		if len(args) < 2 {
 			return nil, errors.New(fmt.Sprint(command.Use, " ", content.ExpectArgument))
 		}
-		params = append(params, args[0])
+		params = append(params, args[1])
+	case command.Exec:
+		return args, nil
 	}
+
 	return params, nil
 }

@@ -78,4 +78,12 @@ func TestLineFromArgs(t *testing.T) {
 		test.AssertErrorEq(t, err, fmt.Sprint(command.Use, " ", content.ExpectArgument))
 	})
 
+	t.Run("fallback on 'exec' if no command matches", func(t *testing.T) {
+		subject, err := LineFromArgs([]string{"ls", "-a"})
+		test.AssertNoError(t, err)
+		test.AssertStringEq(t, string(subject.Command), string(command.Exec))
+		test.AssertStringEq(t, subject.Params[0], "ls")
+		test.AssertStringEq(t, subject.Params[1], "-a")
+	})
+
 }

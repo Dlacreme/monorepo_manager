@@ -16,6 +16,7 @@ const (
 	List      Command = "list"
 	Use       Command = "use"
 	Workspace Command = "workspace"
+	Exec      Command = "exec"
 )
 
 const ()
