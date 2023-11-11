@@ -1,9 +1,12 @@
 package command
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+)
 
-func help() error {
-	fmt.Printf(`
+func help(w io.Writer) error {
+	fmt.Fprintf(w, `
 NAME:
 	mm - monorepo manager
 

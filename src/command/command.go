@@ -2,7 +2,9 @@ package command
 
 import (
 	"errors"
+	"monorepo_manager/src/config"
 	"monorepo_manager/src/content"
+	"os"
 )
 
 type Command string
@@ -19,12 +21,25 @@ const (
 const ()
 
 func Run(cmd Command, params []string) error {
+	out := os.Stdout
 	switch cmd {
 	case Init:
-		return initialize()
-
+		return initialize(out)
 	case Help:
-		return help()
+		return help(out)
+	}
+	// following commands require a valid config file
+	conf, err := config.Load()
+	if err != nil {
+		return err
+	}
+	switch cmd {
+	case List:
+		return list(conf, out)
+	case Use:
+		return use(conf, out)
+	case Workspace:
+		return workspace(conf, out)
 	}
 	return errors.New(content.CommandNotFound)
 }

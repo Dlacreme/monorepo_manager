@@ -8,6 +8,9 @@ run:
 	$(GO) run $(SRC) $$CMD
 
 test:
+	$(GO) test ./...
+
+test.coverage:
 	$(GO) test -coverpkg=./... ./...
 
 build:

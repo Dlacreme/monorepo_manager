@@ -3,6 +3,7 @@ package command
 import (
 	"errors"
 	"fmt"
+	"io"
 	"monorepo_manager/src/config"
 	"monorepo_manager/src/content"
 	"os"
@@ -10,7 +11,7 @@ import (
 
 // Create a default config file
 // (init keyword was already taken)
-func initialize() error {
+func initialize(w io.Writer) error {
 	if isFileExisting(config.FilePath) {
 		return errors.New(fmt.Sprint(config.FilePath, " ", content.FileExisting))
 	}
@@ -20,7 +21,7 @@ func initialize() error {
 		return err
 	}
 
-	fmt.Println(config.FilePath, content.FileCreated)
+	fmt.Fprintln(w, config.FilePath, content.FileCreated)
 	return nil
 }
 
