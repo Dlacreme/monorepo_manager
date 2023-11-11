@@ -8,6 +8,9 @@ run:
 	$(GO) run $(SRC) $$CMD
 
 test:
+	$(GO) test -failfast ./...
+
+test.suite:
 	$(GO) test ./...
 
 test.coverage:

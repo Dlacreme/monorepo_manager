@@ -9,7 +9,9 @@ const (
 	// success
 	FileCreated string = "file successfully created."
 	// commands
-	NoWorkspaceAvailable string = "No workspace available."
-	WorkspaceNotFound    string = "workspace not found."
-	NowUsingWorkspace    string = "now using workspace"
+	NoWorkspaceAvailable   string = "No workspace available."
+	WorkspaceNotFound      string = "workspace not found."
+	NowUsingWorkspace      string = "Now using workspace"
+	NoWorkspaceInUse       string = "No workspace in use"
+	WorkspaceInUseNotFound string = "in use but this workspace does not exists."
 )
