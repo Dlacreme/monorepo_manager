@@ -15,6 +15,7 @@ func TestLoad(t *testing.T) {
 		test.AssertNoError(t, err)
 		test.AssertStringEq(t, subject.Name, "default")
 		test.AssertNumEq(t, len(subject.Workspaces), 1)
+		test.AssertStringEq(t, subject.EnvVarName, "MM_WORKSPACE")
 	})
 
 	t.Run("return an error if the file is missing", func(t *testing.T) {

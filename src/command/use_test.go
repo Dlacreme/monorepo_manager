@@ -14,7 +14,8 @@ func TestUse(t *testing.T) {
 	t.Run("set the workspace", func(t *testing.T) {
 		var out bytes.Buffer
 		conf := config.Config{
-			Name: "test config",
+			EnvVarName: "MM_TEST_WORKSPACE",
+			Name:       "test config",
 			Workspaces: []config.Workspace{
 				{Name: "workspace"},
 			},
@@ -23,7 +24,7 @@ func TestUse(t *testing.T) {
 
 		test.AssertNoError(t, err)
 		test.AssertStringEq(t, out.String(), fmt.Sprintln(content.NowUsingWorkspace, "workspace"))
-		test.AssertStringEq(t, os.Getenv(ENV_VARNAME), "workspace")
+		test.AssertStringEq(t, os.Getenv(conf.EnvVarName), "workspace")
 	})
 
 	t.Run("returns an error if the workspace doesn't exist", func(t *testing.T) {

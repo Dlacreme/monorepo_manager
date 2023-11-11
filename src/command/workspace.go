@@ -10,7 +10,7 @@ import (
 )
 
 func workspace(w io.Writer, config *config.Config) error {
-	used_ws := os.Getenv(ENV_VARNAME)
+	used_ws := os.Getenv(config.EnvVarName)
 	if used_ws == "" {
 		fmt.Fprintln(w, content.NoWorkspaceInUse)
 		return nil

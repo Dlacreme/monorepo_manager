@@ -7,7 +7,8 @@ import (
 )
 
 const (
-	FilePath = "monorepo.toml"
+	FilePath   = "monorepo.toml"
+	envVarName = "MM_WORKSPACE"
 )
 
 func Load() (*Config, error) {
@@ -19,7 +20,9 @@ func LoadFromFile(filepath string) (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
-	var conf Config
+	var conf Config = Config{
+		EnvVarName: envVarName,
+	}
 
 	_, err = toml.Decode(string(f), &conf)
 	if err != nil {
@@ -30,6 +33,7 @@ func LoadFromFile(filepath string) (*Config, error) {
 }
 
 type Config struct {
+	EnvVarName string
 	Name       string
 	Workspaces []Workspace
 }
