@@ -7,7 +7,7 @@ import (
 	"monorepo_manager/src/content"
 )
 
-func list(conf *config.Config, w io.Writer) error {
+func list(w io.Writer, conf *config.Config) error {
 	if len(conf.Workspaces) == 0 {
 		fmt.Fprintln(w, content.NoWorkspaceAvailable)
 	}

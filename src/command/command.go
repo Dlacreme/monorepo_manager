@@ -35,11 +35,11 @@ func Run(cmd Command, params []string) error {
 	}
 	switch cmd {
 	case List:
-		return list(conf, out)
+		return list(out, conf)
 	case Use:
-		return use(conf, out)
+		return use(out, conf, params)
 	case Workspace:
-		return workspace(conf, out)
+		return workspace(out, conf)
 	}
 	return errors.New(content.CommandNotFound)
 }

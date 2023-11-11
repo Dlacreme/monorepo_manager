@@ -25,7 +25,7 @@ func TestList(t *testing.T) {
 				},
 			},
 		}
-		err := list(&conf, &out)
+		err := list(&out, &conf)
 		test.AssertNoError(t, err)
 		test.AssertStringEq(t, out.String(), " - workspace 1\n - workspace 2\n")
 	})
@@ -36,7 +36,7 @@ func TestList(t *testing.T) {
 			Name:       "test config",
 			Workspaces: []config.Workspace{},
 		}
-		err := list(&conf, &out)
+		err := list(&out, &conf)
 		test.AssertNoError(t, err)
 		test.AssertStringEq(t, out.String(), fmt.Sprintln(content.NoWorkspaceAvailable))
 	})

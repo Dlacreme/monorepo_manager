@@ -5,6 +5,6 @@ import (
 	"monorepo_manager/src/config"
 )
 
-func workspace(config *config.Config, w io.Writer) error {
+func workspace(w io.Writer, config *config.Config) error {
 	return nil
 }

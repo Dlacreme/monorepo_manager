@@ -10,4 +10,6 @@ const (
 	FileCreated string = "file successfully created."
 	// commands
 	NoWorkspaceAvailable string = "No workspace available."
+	WorkspaceNotFound    string = "workspace not found."
+	NowUsingWorkspace    string = "now using workspace"
 )

@@ -10,16 +10,6 @@ const (
 	FilePath = "monorepo.toml"
 )
 
-type Config struct {
-	Name       string
-	Workspaces []Workspace
-}
-
-type Workspace struct {
-	Name   string
-	Folder string
-}
-
 func Load() (*Config, error) {
 	return LoadFromFile(FilePath)
 }
@@ -37,4 +27,23 @@ func LoadFromFile(filepath string) (*Config, error) {
 	}
 
 	return &conf, nil
+}
+
+type Config struct {
+	Name       string
+	Workspaces []Workspace
+}
+
+func (c *Config) IsWorkspaceExisting(name string) bool {
+	for _, ws := range c.Workspaces {
+		if ws.Name == name {
+			return true
+		}
+	}
+	return false
+}
+
+type Workspace struct {
+	Name   string
+	Folder string
 }
