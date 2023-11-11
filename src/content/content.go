@@ -14,4 +14,5 @@ const (
 	NowUsingWorkspace      string = "Now using workspace"
 	NoWorkspaceInUse       string = "No workspace in use"
 	WorkspaceInUseNotFound string = "in use but this workspace does not exists."
+	NothingToDo            string = "Nothing to do."
 )

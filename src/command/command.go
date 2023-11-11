@@ -19,8 +19,6 @@ const (
 	Exec      Command = "exec"
 )
 
-const ()
-
 func Run(cmd Command, params []string) error {
 	out := os.Stdout
 	switch cmd {
@@ -41,6 +39,8 @@ func Run(cmd Command, params []string) error {
 		return use(out, conf, params)
 	case Workspace:
 		return workspace(out, conf)
+	case Exec:
+		return exec(out, conf, params)
 	}
 	return errors.New(content.CommandNotFound)
 }

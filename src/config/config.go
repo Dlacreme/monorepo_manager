@@ -47,7 +47,26 @@ func (c *Config) IsWorkspaceExisting(name string) bool {
 	return false
 }
 
+func (c *Config) GetWorkspace(name string) *Workspace {
+	for _, ws := range c.Workspaces {
+		if ws.Name == name {
+			return &ws
+		}
+	}
+	return nil
+}
+
+func (c *Config) GetRoot() *Workspace {
+	for _, ws := range c.Workspaces {
+		if ws.IsRoot {
+			return &ws
+		}
+	}
+	return nil
+}
+
 type Workspace struct {
 	Name   string
 	Folder string
+	IsRoot bool
 }
