@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"monorepo_manager/src/config"
-	"monorepo_manager/src/global"
+	"monorepo_manager/src/content"
 	"os"
 )
 
@@ -12,7 +12,7 @@ import (
 // (init keyword was already taken)
 func initialize() error {
 	if isFileExisting(config.FilePath) {
-		return errors.New(fmt.Sprint(config.FilePath, " ", global.FileExisting))
+		return errors.New(fmt.Sprint(config.FilePath, " ", content.FileExisting))
 	}
 
 	err := os.WriteFile(config.FilePath, config.EmptyConfigFile(), 0644)
@@ -20,7 +20,7 @@ func initialize() error {
 		return err
 	}
 
-	fmt.Println(config.FilePath, global.FileCreated)
+	fmt.Println(config.FilePath, content.FileCreated)
 	return nil
 }
 

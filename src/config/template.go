@@ -7,6 +7,13 @@ func EmptyConfigFile() []byte {
 
 name = "My Monorepo App"
 
+[[workspaces]]
+name = "$root"
+folder = "."
+setup = []
+start = ["docker compose up -d", "source .env"]
+stop = []
+
 # first workspace is defined using only the required fields
 [[workspaces]]
 name = "workspace1"

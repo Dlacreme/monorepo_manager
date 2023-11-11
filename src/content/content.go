@@ -1,4 +1,4 @@
-package global
+package content
 
 const (
 	InvalidCommandLine string = "Couldn't find a valid command to run. Use 'help' for help."

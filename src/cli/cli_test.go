@@ -3,7 +3,7 @@ package cli
 import (
 	"fmt"
 	"monorepo_manager/src/command"
-	"monorepo_manager/src/global"
+	"monorepo_manager/src/content"
 	"monorepo_manager/src/test"
 	"testing"
 )
@@ -18,7 +18,7 @@ func TestLineFromArgs(t *testing.T) {
 
 	t.Run("fail gracefully if no parameters available", func(t *testing.T) {
 		_, err := LineFromArgs([]string{})
-		test.AssertErrorEq(t, err, fmt.Sprint("mm ", global.ExpectArgument))
+		test.AssertErrorEq(t, err, fmt.Sprint("mm ", content.ExpectArgument))
 	})
 
 	t.Run("can parse 'init'", func(t *testing.T) {
@@ -75,7 +75,7 @@ func TestLineFromArgs(t *testing.T) {
 
 	t.Run("return an error if use has no params", func(t *testing.T) {
 		_, err := LineFromArgs([]string{"use"})
-		test.AssertErrorEq(t, err, fmt.Sprint(command.Use, " ", global.ExpectArgument))
+		test.AssertErrorEq(t, err, fmt.Sprint(command.Use, " ", content.ExpectArgument))
 	})
 
 }
